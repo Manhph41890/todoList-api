@@ -4,25 +4,25 @@ namespace App\Services;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use App\Models\todolist;
+use App\Models\titletask;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
 /**
- * Class TodolistService
+ * Class titletaskService
  * @package App\Services
  */
-class TodolistService extends BaseService
+class TitletaskService extends BaseService
 {
     /**
-     * TodolistService constructor.
-     * @param todolist $todolist
+     * TitletaskService constructor.
+     * @param titletask $titletask
      */
-    public function __construct(todolist $todolist)
+    public function __construct(titletask $titletask)
     {
-        $this->model = $todolist;
+        $this->model = $titletask;
     }
 
     /**
@@ -34,13 +34,11 @@ class TodolistService extends BaseService
         $limit = request()->get('limit', 50);
         $search = request()->get('search', '');
 
-        $query = Todolist::select(['id', 'title', 'description', 'due_date', 'priority', 'titletask_id','user_id']);
+        $query = titletask::select(['id', 'title']);
+        $query = titletask::with('todolists')->select(['id', 'title']);
 
         if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%$search%")
-                    ->orWhere('description', 'like', "%$search%");
-            });
+            $query->where('title', 'like', "%$search%");
         }
 
         return $query->paginate($limit);
@@ -48,49 +46,49 @@ class TodolistService extends BaseService
 
     /**
      * @param $params
-     * @return todolist
+     * @return titletask
      * @throws Throwable
      */
-    public function create($params): todolist
+    public function create($params): titletask
     {
         DB::beginTransaction();
         try {
-            $todolist = $this->model->create($params);
+            $titletask = $this->model->create($params);
         } catch (Exception $exception) {
             DB::rollBack();
             throw $exception;
         }
         DB::commit();
-        return $todolist;
+        return $titletask;
     }
 
     /**
-     * @param todolist $todolist
+     * @param titletask $titletask
      * @param $params
-     * @return todolist
+     * @return titletask
      * @throws Throwable
      */
-    public function update(todolist $todolist, $params): todolist
+    public function update(titletask $titletask, $params): titletask
     {
         DB::beginTransaction();
         try {
-            $todolist->fill($params)->save();
+            $titletask->fill($params)->save();
         } catch (Exception $exception) {
             DB::rollBack();
             throw $exception;
         }
         DB::commit();
 
-        return $todolist;
+        return $titletask;
     }
     /**
-     * @param todolist $todolist
+     * @param titletask $titletask
      * @return bool|null
      * @throws Exception
      */
-    public function delete(todolist $todolist): ?bool
+    public function delete(titletask $titletask): ?bool
     {
-        Log::info("Deleting", $todolist->toArray());
-        return $todolist->delete();
+        Log::info("Deleting", $titletask->toArray());
+        return $titletask->delete();
     }
 }

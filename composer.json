@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
+        "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.8",
         "league/fractal": "^0.20.1"
     },
@@ -70,11 +71,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:dingo-api/dingoapi-fork.git"
-        }
-    ]
+    "prefer-stable": true
 }

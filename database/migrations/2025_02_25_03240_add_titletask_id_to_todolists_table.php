@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\titletask;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('todolists', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->foreignId('titletask_id')->nullable()->constrained('titletasks')->onDelete('cascade');
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('todolists', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::table('todolists', function (Blueprint $table) {});
     }
 };

@@ -6,8 +6,8 @@ use App\Models\todolist;
 use App\Http\Requests\StoretodolistRequest;
 use App\Http\Requests\UpdatetodolistRequest;
 use App\Services\TodolistService;
-use App\Transformers\DetailTransformer;
-use App\Transformers\ListTransformer;
+use App\Transformers\todolist\DetailTransformer;
+use App\Transformers\todolist\ListTransformer;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +23,6 @@ class TodolistController extends Controller
     protected $todolist;
 
     /**
-     * ArticleController constructor.
      * @param TodolistService $TodolistService
      */
     public function __construct(TodolistService $TodolistService, todolist $todolist)
@@ -41,14 +40,6 @@ class TodolistController extends Controller
         return responder()->paginate($todolists, new ListTransformer);
     }
 
-    // public function create()
-    // {
-    //     return response()->json(['message' => 'Create new todolist']);
-    // }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     /**
      * @param StoretodolistRequest $request
      * @return JsonResponse
@@ -57,6 +48,7 @@ class TodolistController extends Controller
     public function store(StoretodolistRequest $request)
     {
         $params = $request->all();
+        Log::info($params);
         $this->TodolistService->create($params);
         return responder()->created();
     }
@@ -69,14 +61,6 @@ class TodolistController extends Controller
     {
         return responder()->data($todolist, new DetailTransformer());
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(todolist $todolist)
-    // {
-    //     return response()->json($todolist);
-    // }
 
     /**
      * @param todolist $todolist
@@ -102,5 +86,4 @@ class TodolistController extends Controller
         Log::info($this->TodolistService->delete($todolist));
         return responder()->deleted();
     }
-
 }

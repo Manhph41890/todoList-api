@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers;
+namespace App\Transformers\todolist;
 
 use App\Models\todolist;
 use League\Fractal\Resource\Collection;

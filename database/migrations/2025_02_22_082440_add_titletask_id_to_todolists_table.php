@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\titletask;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,13 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todolists', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->date('due_date');
-            $table->enum('piority', ['high', 'normal', 'low']);
-            $table->timestamps();
+        Schema::table('todolists', function (Blueprint $table) {
+            $table->foreignId('titletask_id')->nullable()->constrained()->onDelete('cascade');
         });
     }
 
@@ -26,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todolists');
+        Schema::table('todolists', function (Blueprint $table) {
+            $table->dropForeign(['titletask_id']);
+            $table->dropColumn('titletask_id');
+        });
     }
 };

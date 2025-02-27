@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function todolists()
+    {
+        return $this->hasMany(todolist::class, 'titletask_id', 'id');
+    }
 }

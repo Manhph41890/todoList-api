@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\GoogleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return '<style>body { overflow: hidden; }</style>
+  return '<style>body { overflow: hidden; }</style>
         <pre style="position: absolute;top: 50%;transform: translate(0, -50%);text-align: center;width: 100%;">       
           :::     ::::::::: :::::::::::
     :+: :+:   :+:    :+:    :+:
@@ -25,3 +25,8 @@ Route::get('/', function () {
       ###     ### ###       ###########
     </pre>';
 });
+
+
+// Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
+
+// Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
