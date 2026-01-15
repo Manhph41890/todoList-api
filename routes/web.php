@@ -28,7 +28,6 @@ Route::get('/', function () {
     </pre>';
 });
 
-
 // Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 
 // Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
