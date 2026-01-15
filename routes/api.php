@@ -41,6 +41,7 @@ Route::delete('titletask/{titletask}', [TitletaskController::class, 'destroy'])-
 //         'user' => $request->user()
 //     ]);
 // });
+
 Route::middleware('auth:sanctum')->get('/auth/user', function (Request $request) {
     return response()->json(['user' => $request->user()]);
 });

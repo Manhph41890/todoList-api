@@ -14,18 +14,19 @@ use App\Http\Controllers\Auth\GoogleController;
 */
 
 Route::get('/', function () {
-  return '<style>body { overflow: hidden; }</style>
-        <pre style="position: absolute;top: 50%;transform: translate(0, -50%);text-align: center;width: 100%;">       
-          :::     ::::::::: :::::::::::
-    :+: :+:   :+:    :+:    :+:
-   +:+   +:+  +:+    +:+    +:+
-  +#++:++#++: +#++:++#+     +#+
-  +#+     +#+ +#+           +#+
-  #+#     #+# #+#           #+#
-      ###     ### ###       ###########
+    return '<style>
+        body { background-color: #0d1117; color: #58a6ff; overflow: hidden; margin: 0; font-family: monospace; }
+    </style>
+    <pre style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; line-height: 1.2; white-space: pre;">
+::::     ::::      :::     ::::    ::: :::     :::      :::::::::  ::::::::::: :::       :::           :::     ::::::::: :::::::::::
++:+:+: :+:+:+    :+: :+:   :+:+:   :+: :+:     :+:      :+:    :+: :+:         :+:       :+:         :+: :+:   :+:    :+:    :+:    
++:+ +:+:+ +:+   +:+   +:+  :+:+:+  +:+ +:+     +:+      +:+    +:+ +:+          +:+     +:+         +:+   +:+  +:+    +:+    +:+    
++#+  +:+  +#+  +#++:++#++: +#+ +:+ +#+ +#++:++#++:      +#+    +:+ +#++:++#      +#+   +#+         +#++:++#++: +#++:++#+     +#+    
++#+       +#+  +#+     +#+ +#+  +:+:+# +#+     +#+      +#+    +:+ +#+            +#+ +#+          +#+     +#+ +#+           +#+    
+#+#       #+#  #+#     #+# #+#   #+#+# #+#     #+#      #+#    +:+ #+#             #+#+#           #+#     +#+ #+#           +#+    
+###       ###  ###     ### ###    #### ###     ###      #########  ###########      ###            ###     ### ###       ###########
     </pre>';
 });
-
 
 // Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 
